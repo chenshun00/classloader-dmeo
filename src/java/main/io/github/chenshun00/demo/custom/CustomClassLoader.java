@@ -75,7 +75,13 @@ public class CustomClassLoader extends URLClassLoader {
                 '}';
     }
 
+    /**
+     * 满足一定规则加载
+     *
+     * @param name 名字
+     * @return boolean
+     */
     private boolean onLoadClass(String name) {
-        return name.startsWith("top.huzhurong.test.classloader");
+        return name.startsWith("io.github.chenshun00.demo");
     }
 }
