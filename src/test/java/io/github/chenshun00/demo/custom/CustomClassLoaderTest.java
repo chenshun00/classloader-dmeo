@@ -1,5 +1,6 @@
 package io.github.chenshun00.demo.custom;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
@@ -28,9 +29,18 @@ public class CustomClassLoaderTest {
             urls[i] = toUrl(files[i]);
         }
         CustomClassLoader customClassLoader = new CustomClassLoader(urls, Object.class.getClassLoader());
+        CustomClassLoader customClassLoader2 = new CustomClassLoader(urls, Object.class.getClassLoader());
 
         final Class<?> aClass = customClassLoader.loadClass("org.apache.log4j.Level", false);
+        final Class<?> aClass2 = customClassLoader.loadClass("org.apache.log4j.Level", false);
         System.out.println(aClass.getName());
+        System.out.println(aClass.equals(aClass2));
+
+        final URL[] urLs = customClassLoader.getURLs();
+        Assert.assertEquals(14, urLs.length);
+        for (URL urL : urLs) {
+            System.out.println(urL);
+        }
     }
 
     private static URL toUrl(File file) {
