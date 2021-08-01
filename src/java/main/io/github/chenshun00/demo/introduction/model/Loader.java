@@ -1,4 +1,4 @@
-package io.github.chenshun00.demo.model;
+package io.github.chenshun00.demo.introduction.model;
 
 /**
  * @author luobo.cs@raycloud.com
