@@ -1,5 +1,6 @@
 package io.github.chenshun00.demo.noSuchMethodError;
 
+import com.example.noSuchMethodErrorDemo.FirstDemo;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
@@ -17,5 +18,11 @@ public class NoSuchMethodErrorDemoTest {
         final Object object = aClass.newInstance();
         final Method second = aClass.getDeclaredMethod("second");
         second.invoke(object);
+    }
+
+    @Test
+    public void testLoaderError() {
+        FirstDemo firstDemo = new FirstDemo();
+        firstDemo.second();
     }
 }
