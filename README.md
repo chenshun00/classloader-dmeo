@@ -31,3 +31,6 @@ classloader-dmeo
     *   https://github.com/openwide-java/tomcat-classloader-ordered/
     *   https://www.yuque.com/chenshun00/sbny2o/qazrl7
     *   https://bz.apache.org/bugzilla/show_bug.cgi?id=57129
+    *   http://github.com/apache/tomcat
+        * 7 FileDirContext.java
+        * 8/8/10 DirResourceSet.java
