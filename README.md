@@ -1,6 +1,5 @@
 # classloader-dmeo
 classloader-dmeo
-
 # PPT 大纲
 * 提出问题
     *   出现NoSuchMethodError本质原因是什么.(classloader加载的类没有定义这个方法,换句话说,加载错class了)
@@ -20,12 +19,12 @@ classloader-dmeo
     *   SpringBoot Classloader
         *   SpringBoot的3种启动方式，不同启动方式之间classloader的区别(demo演示),为什么我们选择了PropertiesLauncher.
         *   案例:读取不到文件是怎么回事 + 深入sun.misc.URLClassPath
-        *   实战:实现NoSuchMethodError定制化
+        *   案例:实现NoSuchMethodError定制化 
     *   APM(arthas/Skywalking/Pinpoint)是如何使用Classloader的
         *   Class加载与隔离
             *   如何隔离agent与应用class
             *   应用如何加载plugin class
-        *   案例演示
+        *   案例
 *   链接
     *   http://www.jdotsoft.com/JarClassLoader.php
     *   https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html#executable-jar.nested-jars.jar-structure
