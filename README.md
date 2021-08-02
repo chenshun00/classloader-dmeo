@@ -10,12 +10,17 @@ classloader-dmeo
     * classpath:,classpath*:和classloader有什么关系.
 * 大纲
     * 简述类加载机制
+        * 类加载过程
+            * 加载.class文件(字节码)(loadClass)
+                * findClass 找到
+                * defineClass 转换
+                * resolveClass(link)
         * 双亲委任模型
-            * 加载.class文件(字节码)
         * SPI(Service Provider Interface)
             * 讨论:是否打破了双亲委任模型
         * 案例:helloWorld演示 + 初识sun.misc.URLClassPath
         * 自定义Classloader(demo演示)
+            * Class隔离
         * 自定义classloader演示NoSuchMethodError
     * Tomcat Classloader
         * Tomcat加载模型,为什么说Tomcat打破了双亲委任模型(源代码)

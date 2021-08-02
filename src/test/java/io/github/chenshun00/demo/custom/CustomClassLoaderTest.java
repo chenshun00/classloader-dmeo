@@ -1,5 +1,6 @@
 package io.github.chenshun00.demo.custom;
 
+import org.apache.log4j.HTMLLayout;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,24 +18,30 @@ public class CustomClassLoaderTest {
 
     @Test(expected = ClassNotFoundException.class)
     public void loadClassFail() throws ClassNotFoundException {
-        CustomClassLoaderTest.class.getClassLoader().loadClass("org.apache.log4j.Level");
+        CustomClassLoaderTest.class.getClassLoader().loadClass("org.apache.log4j.FW");
+    }
+
+    @Test(expected = ClassCastException.class)
+    public void testCast() throws Exception {
+        final URL[] urls = loadUrls();
+        CustomClassLoader customClassLoader = new CustomClassLoader(urls, Object.class.getClassLoader());
+        CustomClassLoader customClassLoader2 = new CustomClassLoader(urls, Object.class.getClassLoader());
+        final Class<?> aClass = customClassLoader.loadClass("org.apache.log4j.HTMLLayout", false);
+        final Class<?> aClass2 = customClassLoader2.loadClass("org.apache.log4j.HTMLLayout", false);
+        System.out.println("类名:" + aClass.getName());
+        System.out.println("是否相同类:" + aClass.equals(aClass2));
+        final Object first = aClass.newInstance();
+        HTMLLayout firstLayout = (HTMLLayout) first;
     }
 
     @Test
-    public void loadClass() throws ClassNotFoundException {
-        String agentPath = "/Users/chenshun/open/classloader-dmeo/src/test/resources/lib";
-        File dir = new File(agentPath + "/lib");
-        File[] files = dir.listFiles();
-        assert files != null;
-        URL[] urls = new URL[files.length];
-        for (int i = 0; i < files.length; i++) {
-            urls[i] = toUrl(files[i]);
-        }
+    public void loadClass() throws Exception {
+        final URL[] urls = loadUrls();
         CustomClassLoader customClassLoader = new CustomClassLoader(urls, Object.class.getClassLoader());
         CustomClassLoader customClassLoader2 = new CustomClassLoader(urls, Object.class.getClassLoader());
 
-        final Class<?> aClass = customClassLoader.loadClass("org.apache.log4j.Level", false);
-        final Class<?> aClass2 = customClassLoader.loadClass("org.apache.log4j.Level", false);
+        final Class<?> aClass = customClassLoader.loadClass("org.apache.log4j.HTMLLayout", false);
+        final Class<?> aClass2 = customClassLoader.loadClass("org.apache.log4j.HTMLLayout", false);
         System.out.println("类名:" + aClass.getName());
         System.out.println("是否相同类:" + aClass.equals(aClass2));
 
@@ -55,16 +62,7 @@ public class CustomClassLoaderTest {
 
     @Test
     public void name() throws Exception {
-        final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        System.out.println("线程上下文加载器:" + contextClassLoader);
-        String agentPath = "/Users/chenshun/open/classloader-dmeo/src/test/resources/lib";
-        File dir = new File(agentPath + "/lib");
-        File[] files = dir.listFiles();
-        assert files != null;
-        URL[] urls = new URL[files.length];
-        for (int i = 0; i < files.length; i++) {
-            urls[i] = toUrl(files[i]);
-        }
+        final URL[] urls = loadUrls();
         CustomClassLoader customClassLoader = new CustomClassLoader(urls, Object.class.getClassLoader());
         final Class<?> aClass = customClassLoader.loadClass("org.slf4j.LoggerFactory", true);
         final Method getLogger = aClass.getDeclaredMethod("getLogger", String.class);
@@ -85,5 +83,17 @@ public class CustomClassLoaderTest {
 
     public void log(Object obj, Method method, String msg) throws Exception {
         method.invoke(obj, msg);
+    }
+
+    private URL[] loadUrls() {
+        String agentPath = "./src/test/resources/lib";
+        File dir = new File(agentPath + "/lib");
+        File[] files = dir.listFiles();
+        assert files != null;
+        URL[] urls = new URL[files.length];
+        for (int i = 0; i < files.length; i++) {
+            urls[i] = toUrl(files[i]);
+        }
+        return urls;
     }
 }

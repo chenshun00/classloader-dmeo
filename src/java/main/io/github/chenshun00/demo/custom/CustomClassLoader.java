@@ -2,6 +2,7 @@ package io.github.chenshun00.demo.custom;
 
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.security.ProtectionDomain;
 
 /**
  * @author luobo.cs@raycloud.com
@@ -32,6 +33,11 @@ public class CustomClassLoader extends URLClassLoader {
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
         return loadClass(name, false);
+    }
+
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+        return super.findClass(name);
     }
 
     @Override
