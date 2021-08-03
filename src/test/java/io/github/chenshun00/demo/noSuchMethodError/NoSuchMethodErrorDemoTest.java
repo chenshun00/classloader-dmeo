@@ -12,9 +12,18 @@ import java.lang.reflect.Method;
 public class NoSuchMethodErrorDemoTest {
 
     @Test
-    public void shouldNoSuchMethodError() throws Exception {
+    public void mustNotNoSuchMethodError() throws Exception {
         NoSuchMethodErrorDemo noSuchMethodErrorDemo = new NoSuchMethodErrorDemo();
         final Class<?> aClass = noSuchMethodErrorDemo.shouldNoSuchMethodError(false);
+        final Object object = aClass.newInstance();
+        final Method second = aClass.getDeclaredMethod("second");
+        second.invoke(object);
+    }
+
+    @Test(expected = NoSuchMethodException.class)
+    public void mustNoSuchMethodError() throws Exception {
+        NoSuchMethodErrorDemo noSuchMethodErrorDemo = new NoSuchMethodErrorDemo();
+        final Class<?> aClass = noSuchMethodErrorDemo.shouldNoSuchMethodError(true);
         final Object object = aClass.newInstance();
         final Method second = aClass.getDeclaredMethod("second");
         second.invoke(object);
