@@ -4,11 +4,11 @@ classloader-dmeo
 
 # PPT 大纲
 
-* 提出问题
+* 问题
     * 出现NoSuchMethodError本质原因是什么.(classloader加载的类没有定义这个方法,换句话说,加载错class了)
     * jar包冲突为什么加载的不是正确的jar包.(为什么会加载错class,咋就不能加载到对的呢,为什么本地很少出现NoSuchMethodError)
     * classpath:,classpath*:和classloader有什么关系.
-* 大纲
+* 应用
     * 简述类加载机制
         * 类加载过程
             * 加载.class文件(字节码)(loadClass)
