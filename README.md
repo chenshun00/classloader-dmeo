@@ -16,8 +16,6 @@ classloader-dmeo
                 * defineClass 转换
                 * resolveClass(link)
         * 双亲委任模型
-        * SPI(Service Provider Interface)
-            * 讨论:是否打破了双亲委任模型
         * 案例:helloWorld演示 + 初识sun.misc.URLClassPath
         * 自定义Classloader(demo演示)
             * Class隔离
@@ -43,4 +41,4 @@ classloader-dmeo
     * https://bz.apache.org/bugzilla/show_bug.cgi?id=57129
     * http://github.com/apache/tomcat
         * 7 FileDirContext.java
-        * 8/8/10 DirResourceSet.java
+        * 8/9/10 DirResourceSet.java
